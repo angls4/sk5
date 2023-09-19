@@ -1,0 +1,78 @@
+generator client {
+  provider     = "prisma-kysely"
+  output       = "../src/db"
+  fileName     = "types.ts"
+  enumFileName = "enums.ts"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model doc {
+  id      Int       @id @default(autoincrement())
+  name    String
+  groupId Int       @default(0)
+  group   group     @relation(fields: [groupId], references: [id], onDelete: Cascade, map: "Doc_groupId_fkey")
+  docfile docfile[]
+
+  @@unique([groupId, name], map: "Doc_groupId_name_key")
+  @@index([name], map: "Doc_name_idx")
+}
+
+model docfile {
+  id          Int      @id @default(autoincrement())
+  dateCreated DateTime @default(now())
+  docId       Int
+  name        String
+  userId      String
+  isActive    Boolean  @default(true)
+  fileType    String?
+  doc         doc      @relation(fields: [docId], references: [id], onDelete: Cascade, map: "DocFile_docId_fkey")
+  user        user     @relation(fields: [userId], references: [id], map: "DocFile_userId_fkey")
+
+  @@unique([docId, name], map: "DocFile_docId_name_key")
+  @@index([name], map: "DocFile_name_idx")
+  @@index([userId], map: "DocFile_userId_fkey")
+}
+
+model group {
+  id          Int     @id @default(autoincrement())
+  name        String
+  parentId    Int?
+  doc         doc[]
+  group       group?  @relation("groupTogroup", fields: [parentId], references: [id], onDelete: Cascade, map: "Group_parentId_fkey")
+  other_group group[] @relation("groupTogroup")
+
+  @@unique([parentId, name], map: "Group_parentId_name_key")
+  @@index([name], map: "Group_name_idx")
+}
+
+model key {
+  id              String  @id @unique(map: "Key_id_key")
+  hashed_password String?
+  user_id         String
+  user            user    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "Key_user_id_fkey")
+
+  @@index([user_id], map: "Key_user_id_idx")
+}
+
+model session {
+  id             String @id @unique(map: "Session_id_key")
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           user   @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "Session_user_id_fkey")
+
+  @@index([user_id], map: "Session_user_id_idx")
+}
+
+model user {
+  id           String    @id @unique(map: "User_id_key")
+  name         String
+  phone_number String    @unique(map: "User_phone_number_key")
+  docfile      docfile[]
+  key          key[]
+  session      session[]
+}

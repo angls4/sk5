@@ -1,0 +1,620 @@
+RANCANG BANGUN APLIKASI PENGELOLAAN DATA SUMUR BERBASIS WEB DI PT PERTAMINA HULU ROKAN ZONA 4 MENGGUNAKAN METODE WATERFALL
+ 
+PT. Pertamina,
+Jl. Jendral Sudirman No. 2, Prabumulih Sumatera Selatan
+31121
+ 
+LAPORAN MAGANG
+
+
+diajukan untuk memenuhi syarat kelulusan mata kuliah Magang
+pada Fakultas Matematika dan Ilmu Pengetahuan Alam
+Universitas Padjadjaran
+
+
+Adnan Rafiyansyah Majid
+NPM 140810200029
+
+ 
+
+
+UNIVERSITAS PADJADJARAN
+FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM
+PROGRAM STUDI TEKNIK INFORMATIKA
+SUMEDANG
+2023
+ 
+KATA PENGANTAR
+
+
+Bismillahirahmanirrahim. Dengan menyebut nama Allah yang Maha Pengasih dan Maha Penyayang. Segala puji dan syukur penulis panjatkan ke hadirat Allah SWT yang telah memberikan rahmat dan karunia-Nya sehingga penulis dapat menyelesaikan penyusunan laporan magang yang berjudul “Rancang Bangun Aplikasi Pengelolaan Data Sumur Berbasis Web i Pt Pertamina Hulu Rokan Zona 4 Menggunakan Metode Waterfall” sebagai salah satu syarat menempuh sarjana pada Program Studi S-1 Teknik Informatika Fakultas Matematika dan Ilmu Pengetahuan Alam Universitas Padjadjaran.
+Dalam proses penyusunan dan penulisan laporan magang ini tidak terlepas dari bantuan, bimbingan, serta dukungan dari berbagai pihak. Oleh karena itu, dalam kesempatan ini penulis mengucapkan terima kasih kepada keluarga penulis yang selalu memberikan motivasi dan doa yang menjadi pendorong dalam penyelesaian laporan magang ini. Penulis juga mengucapkan terima kasih sebanyak-banyaknya kepada:
+1.	Prof. Dr. Iman Rahayu, S.Si., M.Si. selaku Dekan Fakultas Matematika dan Ilmu Pengetahuan Alam Universitas Padjadjaran.
+2.	Dr. Setiawan Hadi, M. Sc.CS., selaku Kepala Departemen Ilmu Komputer Fakultas Matematika dan Ilmu Pengetahuan Alam Universitas Padjadjaran.
+3.	Dr. Juli Rejito, M.Kom, selaku Ketua Program Studi S-1 Teknik Informatika Fakultas Matematika dan Ilmu Pengetahuan Alam Universitas Padjadjaran.
+4.	Dosen-dosen Teknik Informatika Unpad yang telah mengajar dan memberikan ilmu kepada penulis selama masa perkuliahan yang membawa penulis pada posisi sekarang ini.
+5.	Mas Aziz, selaku mentor saya dalam program magang di PT Pertamina Hulu Rokan Zona 4.
+6.	Semua yang terlibat di PT Pertamina Hulu Rokan Zona 4, yang telah memberikan bantuan dan pengalaman kepada penulis selama masa magang.
+Akhir kata, penulis berharap laporan magang ini dapat bermanfaat bagi pembaca maupun penulis.
+
+Jatinangor, 14 September 2023
+ 
+Adnan Rafiyansyah Majid
+ 
+DAFTAR ISI
+
+DAFTAR ISI	v
+DAFTAR TABEL	iix
+DAFTAR GAMBAR 	ix
+BAB I  PENDAHULUAN	1
+1.1	Latar Belakang 	1
+1.2	Identifikasi Masalah	1
+1.3	Batasan Masalah	1
+1.4	Maksud dan Tujuan	1
+1.5	Manfaat	1
+1.6	Lokasi dan Waktu Pelaksanaan Kerja Praktek/Magang	1
+ BAB II TINJAUAN PUSTAKA	2
+2.1	Waterfall	2
+2.2	Node.js	4
+2.3	Svelte	5
+2.4	Unified Modeling Language (UML)	6
+2.4.1 Use Case Diagram	6
+2.4.2 Package Diagram	7
+2.4.3 Component Diagram	8
+2.4.4 Component Diagram	9
+2.4.5 Data Flow Diagram (DFD)	10
+BAB III ANALISIS DAN PERANCANGAN	12
+3.1	Deskripsi Perangkat Lunak	12
+3.2	Analisis Kebutuhan	12
+3.2.1	Analisis Kebutuhan Pengguna	12
+3.2.2	Analisis Kebutuhan Sistem	13
+3.2.2.1	Kebutuhan Perangkat Keras	14
+3.2.2.2	Kebutuhan Perangkat Lunak	14
+3.3	Unified Modelling Language (UML)	15
+3.3.1	Use Case Diagram	15
+3.3.2	Package Diagram	16
+3.3.3	Component Diagram	18
+3.3.3.1	Interface CRUD Request	18
+3.3.3.2	Interface Storer CRUD	18
+3.3.3.3	Interface File Storer	19
+3.3.3.4	Interface Kysely CRUD	19
+3.3.3.5	Interface Kysely Database Dialect	20
+3.3.3.6	Komponen Server	20
+3.3.3.7	Komponen Client	21
+3.3.3.8	Komponen Server Model	22
+3.3.3.9	Komponen Client Controller	23
+3.3.4	Data Flow Diagram	24
+3.4	Rancangan Database	25
+3.4.1	Tabel Group	26
+3.4.2	Tabel Doc	27
+3.4.3	Tabel Docfile	27
+3.4.4	Tabel User	28
+3.5	Penjadwalan Proyek	29
+BAB IV HASIL DAN PEMBAHASAN	30
+4.1	Hasil Pengembangan Backend	30
+4.2	Hasil Pengembangan Frontend	36
+BAB V KESIMPULAN DAN SARAN 	42
+5.1	Kesimpulan 	42
+5.2	Saran 	42
+DAFTAR PUSTAKA	43
+LAMPIRAN	44
+
+
+ 
+Daftar Tabel
+ 
+ 
+BAB I 
+PENDAHULUAN
+1.1	Latar Belakang 
+PT Pertamina (Persero) adalah perusahaan milik negara (BUMN) terbesar di Indonesia dalam hal pendapatan dan labanya. Perusahaan ini memiliki keterlibatan aktif di sektor hulu dan hilir industri minyak dan gas di Indonesia. Pada sektor hulu, Pertamina meliputi eksplorasi dan produksi minyak, gas, serta energi panas bumi. Sementara itu, di sektor hilir, Pertamina terlibat dalam berbagai kegiatan seperti pengolahan, pemasaran, perdagangan, dan pengiriman produk-produk energi.
+Salah satu bagian penting dari Pertamina adalah PT Pertamina Hulu Rokan (PHR). PHR didirikan pada tanggal 20 Desember 2018, dan memiliki peran kunci sebagai operator dalam pengelolaan Wilayah Kerja (WK) Rokan. PHR bertanggung jawab atas pengelolaan WK Rokan selama periode 20 tahun, dimulai dari tanggal 9 Agustus 2021 hingga 8 Agustus 2041.
+Wilayah Kerja (WK) Rokan dikelola oleh PT Pertamina Hulu Rokan (PHR) dan merupakan salah satu aset berharga dalam industri minyak dan gas di Indonesia. WK Rokan terdiri dari berbagai lapangan minyak dan gas yang memiliki peran penting dalam pemenuhan kebutuhan energi nasional. Di dalam WK Rokan, terdapat wilayah yang dikenal sebagai Zona 4.
+Zona 4 mencakup 8 lapangan minyak yang strategis, yakni Ogan Komering, Raja Tempirai, Ramba, Corridor, Prabumulih, Limau, Pendopo, dan Adera. Semua lapangan ini berlokasi di Provinsi Sumatra Selatan. Area yang dikelola oleh PHR di Zona 4 memiliki luas yang signifikan, dan banyak lapangan telah mencapai tahap kematangan (mature fields).
+Dari banyaknya lapangan-lapangan di zona 4. Data-data sumur akan diinput ke data access service Inameta, namun data yang di-update disana tidak mencakup data data sumur yang masih dalam proses pengeboran yang terupdate setiap hari atau setiap beberapa jam. Solusi yang ada sekarang adalah untuk mengirim file melewati aplikasi chat atau email. Penulis diberikan tugas untuk membuat sebuah platform atau aplikasi yang bisa digunakan sebagai solusi yang lebih baik dari solusi yang ada sekarang.
+1.2	Identifikasi Masalah
+. Berdasarkan latar belakang yang telah dijelaskan sebelumnya, masalah yang akan dicari solusinya dalam kegiatan magang sebagai berikut:
+1.	Bagaimana membuat Aplikasi web yang mudah diakses yang dapat meng-handle upload data dan menampilkan data-data tersebut.langsung di aplikasi tanpa harus men-download?
+1.3	Batasan Masalah 
+Dari identifikasi masalah tersebut, maka dalam kegiatan magang ini terdapat beberapa batasan masalah sebagai berikut: 
+1.	Website dibangun dengan metode waterfall.
+2.	Pengembangan aplikasi tidak termasuk deployment, database, user management,  atau autentikasi. 
+3.	Website diakses menggunakan semua jenis browser yang mendukung javascript pada desktop. Aplikasi tidak didesain untuk digunakan pada perangkat mobile seperti smartphone.
+4.	Website bersifat online, apabila tidak terkoneksi dengan internet maka website tidak bisa digunakan.
+5.	Target pengguna adalah staf-staf dalam fungsi Well-Operation, Petrophyscist, dan Data Managent (WOPDM), juga geologis yang menginput data sumur.
+1.4	Maksud dan Tujuan 
+Maksud dari kegiatan magang ini, selain sebagai syarat kelulusan adalah Memudahkan staf WOPDM untuk mengakses dan mengolah data.
+
+Tujuan yang ingin dicapai oleh penulis dari kegiatan magang ini adalah berhasil membuat aplikasi pengelolaan data berbasis web yang scalable dan dapat diintegrasikan ke system yang sudah ada.
+1.5	Manfaat 
+Manfaat yang diharapkan oleh penulis dalam melaksanakan kerja praktik lapangan ini adalah:
+1.	Mendapatkan pengalaman dalam merasakan dunia kerja dan mampu melakukan kerjasama dengan tim di perusahaan.
+2.	Memudahkan staf WOPDM untuk mengakses dan mengolah data.
+3.	Menambah pengetahuan dan pembelajaran mengenai pengembangan aplikasi yang scalable dan dapat diintegrasikan ke system yang sudah ada.
+4.	Menambah pengalaman dalam mengadaptasikan sebuah program ke dalam system yang sudah ada.
+1.6	Lokasi dan Waktu Pelaksanaan Kerja Praktek/Magang
+Kegiatan magang dilaksanakan secara luring di Kantor WOPDM PT Pertamina Hulu Rokan Zona 4 yang berlokasi di Jl. Jendral Sudirman No. 2, Prabumulih Sumatera Selatan 31121.
+Waktu pelaksanaan kegiatan magang dilakukan selama kurang dari 2 (dua) bulan mulai tanggal 3 Juli 2023 sampai dengan 31 September 2023 setiap hari senin sampai kamis pukul 08.00 hingga 16.00, dan jumat pukul 08.30 hingga 15.30. dengan jadwal istirahat pukul 12.00 hingga 13.00 (13.30 di hari jumat).
+
+ 
+BAB II
+TINJAUAN PUSTAKA
+2.1	Waterfall
+Winston Royce memperkenalkan Model Waterfall pada tahun 1970. Model ini terdiri dari lima fase: analisis dan spesifikasi kebutuhan, desain, implementasi dan pengujian unit, integrasi dan pengujian sistem, serta operasi dan pemeliharaan. Langkah-langkah selalu mengikuti urutan ini dan tidak tumpang tindih. Pengembang harus menyelesaikan setiap fase sebelum fase berikutnya dimulai. Model ini dinamakan "waterfall" karena representasinya dalam bentuk diagram menyerupai air terjun. (Sayan Kumar Pal, 2023)
+
+1. Fase Analisis dan Spesifikasi Kebutuhan.
+Tujuan dari fase ini adalah memahami persis kebutuhan pelanggan dan mendokumentasikannya dengan benar. Pelanggan dan pengembang perangkat lunak bekerja bersama untuk mendokumentasikan semua fungsi, kinerja, dan kebutuhan antarmuka perangkat lunak. Ini menggambarkan "apa" dari sistem yang akan dihasilkan, bukan "bagaimana."
+
+2.	Fase Desain.
+Fase ini bertujuan mengubah persyaratan yang dikumpulkan menjadi bentuk yang sesuai untuk memungkinkan pengkodean lebih lanjut Disini juga harus mendefinisikan arsitektur perangkat lunak secara keseluruhan bersama dengan desain yang rinci. Semua pekerjaan ini dapat didokumentasikan dalam bentuk Software Design Document (SDD).
+
+3.	Implementasi dan Pengujian Unit.
+Selama fase ini, desain diimplementasikan. Jika SDD lengkap, fase implementasi atau pengkodean berjalan dengan lancar, karena semua informasi yang dibutuhkan oleh pengembang perangkat lunak terdapat dalam SDD.
+4.	Fase Integrasi dan Pengujian Sistem.
+Fase ini sangat penting karena kualitas produk akhir ditentukan oleh efektivitas pengujian yang dilakukan. Hasil yang lebih baik akan mengarah pada pelanggan yang puas, biaya pemeliharaan yang lebih rendah, dan hasil yang akurat. Pengujian unit menentukan efisiensi modul individual. Namun, dalam fase ini, modul-modul diuji untuk interaksi antara satu sama lain dan dengan sistem secara keseluruhan.
+
+5.	Fase Operasi dan Pemeliharaan.
+Pemeliharaan adalah tugas yang dilakukan oleh setiap pengguna setelah perangkat lunak telah diserahkan kepada pelanggan, diinstal, dan beroperasi.
+ 
+Gambarr 2.1 Alur Model Waterfall (www. geeksforgeeks.com/ software-engineering-classical-waterfall-model/)
+2.2	Node.js
+NodeJS adalah runtime environment yang bersifat single-threaded dan asynchronous yang digunakan untuk menjalankan aplikasi server-side dengan menggunakan JavaScript sebagai bahasa utamanya. 
+NodeJS menjalankan operasi yang berbasis event-driven, di mana setiap tugas dipicu oleh event yang memicu fungsi callback. Runtime NodeJS adalah operasi asynchronous dan bersifat non-blocking. Meskipun demikian, ada banyak operasi yang dapat berjalan secara sinkron seperti API pembaca file yang menyediakan 'fs.readFileSync()' dan dapat berjalan secara synchronus.
+NodeJS menjalankan model input/output yang melibatkan membaca, menulis, atau memanipulasi berkas dan mengembalikan data dari dan ke disk, permintaan HTTP, dan juga berinteraksi dengan database.
+ 
+Gambarr 2.2 Komponen-Komponen Utama Node.js (itnext.io/ an-intro-to-node-js)
+
+2.3	Svelte
+Svelte adalah framewok front-end yang digunakan untuk membuat aplikasi web. Svelte memiliki pendekatan berbeda dari beberapa framework lain, dimana Svelte tidak melakukan semua komputasi saat runtime melainkan melakukan kompilasi pada saat tahap build.
+Hasil dari pendekatan ini adalah bundle aplikasi yang lebih kecil, performa yang lebih baik dan pengembangan yang lebih mudah. Svelte tetap erat dengan model pengembangan web klasik berupa HTML, CSS, dan JS, hanya menambahkan beberapa ekstensi pada HTML dan JavaScript. Konsep dan Alat-alat pada Svelte lebih sederhana dibandingkan beberapa opsi framework lainnya.
+
+2.4	Unified Modeling Language (UML)
+Unified Modeling Language (UML) adalah suatu metode dalam pemodelan secara visual yang digunakan sebagai sarana perancangan sistem berorientasi objek. UML juga dapat didefinisikan sebagai suatu bahasa standar visualisasi, perancangan, pembangunan, dan pendokumentasian sistem, atau dikenal juga sebagai bahasa standar penulisan blueprint sebuah software karena sangat lengkap dan detail (Booch. Rumbaugh. & Jacobson, 1998). 
+UML memiliki sembilan jenis diagram dimana hanya beberapa yang sering digunakan, diantaranya : Use Case Diagram, Package Diagram, Component Diagram,
+2.4.1 Use Case Diagram
+	Use Case Diagram adalah salah satu jenis dari diagram UML (Unified Modelling Language) yang menggambarkan hubungan interaksi antara sistem dan actor. Use Case dapat mendeskripsikan tipe interaksi antara si pengguna sistem dengan sistemnya. Langkah awal untuk melakukan pemodelan Use Case perlu adanya suatu diagram yang mampu menjabarkan aksi actor dengan aksi dalam sistem itu sendiri (Booch. Rumbaugh. & Jacobson, 2004).
+ 
+Gambarr 2.3 Simbol-Simbol pada Use Case Diagram (https://www.dicoding.com/blog/contoh-use-case-diagram/)
+
+2.4.2 Package Diagram
+	Package diagram adalah salah satu jenis diagram pada UML digunakan untuk mengelompokan konstruksi tersebut di UML dan mengelompokkan elemen-elemen tersebut secara bersama-sama menjadi level yang lebih tinggi. (Munawar, 2018).
+ 
+Gambarr 2.4 Simbol-Simbol pada Package Diagram
+
+2.4.3 Component Diagram
+	Componet diagram adalah salah satu jenis diagram pada UML yang menggambarkan software pada suatu sistem. Komponen bisa berupa tabel, file data, file exe, dll (dynamic link library), dokumen dan lainlain. (Munawar, 2018).
+ 
+Gambarr 2.5 Simbol-Simbol pada Component Diagram (www.ionos.com)
+2.4.4 Component Diagram
+	Entity Relationship Diagram (ERD) adalah sebuah konsep yang mendiskripsikan hubungan antara penyimpanan (database) dan didasarkan pada persepsi dari sebuah dunia nyata yang terdiri dari sekumpulan objek yaitu disebut sebagai entity dan hubungan atau relasi antar objek-objek tersebut. Entity Relationship Diagram (ERD) menurut (Connolly & Begg, 2005) adalah pendekatan desain database yang dimulai dengan mengidentifikasi data 22 penting yang disebut entitas dan hubungan antara data yang harus diwakili dalam model. Dengan kata lain Entity Relationship Diagram (ERD) digunakan untuk menggambarkan hubungan antara satu entitas dengan entitas yang lain.
+ 
+Gambarr 2.6 Simbol-Simbol pada Entity Relationship Diagram (www.ionos.com)
+
+2.4.5 Data Flow Diagram (DFD)
+	Data Flow Diagram (DFD) adalah representasi grafik dari sebuah sistem. DFD menggambarkan komponen-komponen sebuah sistem, aliran-aliran data di mana komponen-komponen tersebut, dan asal, tujuan, dan penyimpanan dari data tersebut. DFD dapat digunakan untuk dua hal utama, yaitu untuk membuat dokumentasi dari sistem informasi yang ada, atau untuk menyusun dokumentasi untuk sistem informasi yang baru (Leman, 1998 dan Lani Sidarta 1995).
+ 
+Gambarr 2.7 Simbol-Simbol pada Data Flow Diagram (Leman, 1998 dan Lani Sidarta 1995)
+ 
+BAB III
+ANALISIS DAN PERANCANGAN 
+3.1	Deskripsi Perangkat Lunak
+Penulis disini mengembangkan aplikasi berbasis web pengelolaan data sumur untuk PT Pertamina Hulu Rokan Zona 4. Aplikasi ini akan digunakan oleh tim well-operation dan petrophysicist menggunakan aplikasi ini untuk membaca dan menggunakan data yang diunggah oleh tim geologis.
+Penulis ditugaskan untuk membuat aplikasi ini sebagai platform yang dapat di-integrasikan ke system yang sudah ada sebagai tools tambahan, memungkinkan  akses dan update data sumur harian yang lebih mudah. 
+3.2	Analisis Kebutuhan
+Pada fase ini, dilakukan eksplorasi untuk mengidentifikasi kebutuhan yang harus diimplementasikan dalam aplikasi ini. Proses analisis kebutuhan melibatkan penemuan masalah dan penyusunan solusi yang sesuai. Proses analisis kebutuhan ini terdiri dari dua bagian, yaitu analisis kebutuhan sistem dan analisis kebutuhan pengguna.
+3.2.1	Analisis Kebutuhan Pengguna
+Pada tahap ini dilakukan eksplorasi untuk mencari fungsi-fungsi apa yang perlu ada di aplikasi yang penulis buat guna memenuhi kebutuhan-kebutuhan user.
+1.	List sumur, yang berisi
+a.	Nama sumur
+b.	Fungsi untuk menambahkan sumur
+2.	Tampilan sumur yang berisi:
+a.	Data sumur
+b.	Fungsi untuk menampilkan beberapa data sumur secara bersamaan tanpa harus di download (khusus gambar, pdf, xlsx, dan plain text).
+c.	Fungsi untuk otomatis menampilkan data sumur yang terbaru sesuai tipe file-nya.
+d.	Fungsi untuk mengubah layout dan ukuran tampilan data-data sumur.
+e.	Fungsi untuk mengupload file data sumur terbaru.
+3.	Tampilan edit sumur yang berisi
+a.	Fungsi untuk mengubah, dan menghapus sumur.
+b.	Fungsi untuk menambahkan, mengubah, dan menghapus data sumur.
+4. 	Data sumur dapat dikelompokkan dalam suatu lokasi yang mana dapat dikelompokkan dalam suatu lokasi juga.
+5.	Setiap sumur dapat memiliki bermacam-macam informasi dengan bermacam-macam tipe file dengan jumlah yang berbeda-beda. 
+6. 	Terdapat preset atau template untuk membuat sumur agar tidak perlu menambahkan informasi-informasi sumur yang pasti ada pada setiap sumur satu persatu.
+7.	File-file¬ sumur tersimpan pada klien agar tidak memberatkan server setiap kali ingin melihat informasi sumur.
+8.	Layout aplikasi tersimpan agar tidak perlu mengatur layout setiap aplikasi tertutup.
+3.2.2	Analisis Kebutuhan Sistem
+Pada tahap ini, diskusi dengan pengguna berguna untuk mengidentifikasi persyaratan sistem yang diperlukan untuk aplikasi ini. Hasil dari proses tersebut akan membantu menentukan spesifikasi perangkat keras dan perangkat lunak yang harus digunaka. Semua persyaratan ini sangat penting agar sistem dapat beroperasi sesuai dengan harapan dan kebutuhan pengguna.
+3.2.2.1	Kebutuhan Perangkat Keras
+Agar sistem dapat berjalan dengan baik dan mempunyai kemampuan yang memadai, perangkat keras yang dibutuhkan dalam pembuatan aplikasi ini adalah:
+a.	AMD Ryzen 7 5000 Series
+b.	 16 GB RAM
+c.	Penyimpanan SSD 512GB
+d.	Resolusi layar 1920x1080
+3.2.2.2	Kebutuhan Perangkat Lunak
+Kebutuhan perangkat lunak yang digunakan dalam proses pengembangan halaman Promote merupakan perangkat lunak yang bersifat open source, sehingga tidak ada biaya yang diperlukan untuk pembelian perangkat lunak. Perangkat lunak yang digunakan dalam pengembangan fitur adalah sebagai berikut:
+a.	Microsoft Windows 11 sebagai sistem operasi.
+b.	Visual Studio Code sebagai text editor.
+c.	Google Chrome dan Microsoft Edge sebagai web browser.
+d.	Github sebagai Version Control System.
+e.	Node.js sebagai runtime JavaScript.
+f.	PNPM sebagai package manager
+3.3	Unified Modelling Language (UML)
+Di bawah ini adalah diagram-diagarm UML yang digunakan dalam pengembangan aplikasi yang didapat dari hasil analisis sistem.
+3.3.1	Use Case Diagram
+Use case diagram menggambarkan bagaimana hubungan interaksi antara aktor, fungsi aplikasi dan sistem. Pada keseluruhan tampilan aplikasi web yang mana merupakan single-page application.
+
+ 
+Gambarr 3.1 Use Case Diagram
+Pada Gambarr 3.1 dijelaskan bahwa user dapat membuat, mengubah, dan menghapus sumur dan data-datanya, juga men-download dan upload file data sumur, dan juga Mengubah layout tamplian data sumur.
+
+3.3.2	Package Diagram
+Package diagram menggambarkan struktur sistem dengan menunjukkan berbagai komponen yang terdapat di dalamnya seperti class, atribut, metode, dan hubungan antar setiap objeknya. 
+ 
+Gambarr 3.2 Package Diagram
+Komponen-komponen yang termasuk dalam View membutuhkan package “Client Lib” komponen-komponen yang termasuk dalam Controller membutuhkan package “Model” dengan Client Lib dan Model merupakan kumpulan library yang memiliki fungsi dan dependensinya masing-masing. Sedangkan “Node Modules” berfungsi menyimpan dependencies yang dipasang menggunakan package manager.
+
+3.3.3	Component Diagram
+Component Diagram menjelaskan tentang interface yang diperlukan dan disediakan oleh komponen-komponen yang ada dan menjelaskan bagaimana komponen-komponen tersebut berinteraksi satu sama lain.
+Dibuat sedemikian rupa untuk memudahkan perawatan dan pengujian juga meningkatkan skalabilitas dan modularitas aplikasi. Setiap komponen dapat diganti dengan komponen lain asalkan interface yang digunakan sesuai. Jika suatu komponen baru yang ingin digunakan memiliki interface berbeda maka dapat komponen adapter sebagai perantara untuk agar interface-nya sesuai.
+
+3.3.3.1	Interface CRUD Request
+Interface CRUD Request membutuhkan body dari HTTP request sesuai API yang disediakan sebagai input dan mengembalikan hasil operasi CRUD dan status.
+
+3.3.3.2	Interface Storer CRUD
+Interface Storer CRUD menyediakan 3 kelompok fungsi yaitu group, doc, dan docfile dan semuanya memiliki fungsi-fungsi berikut : 
+•	insert, input-nya berupa data-data baru yang ingin ditambahkan dan output-nya berupa data-data yang berhasil ditambahkan.
+•	read, input-nya berupa index data-data yang ingin diambil dan output-nya berupa data-data yang berhasil diambil.
+•	update, input-nya berupa data-data yang ingin di-update dan output-nya berupa data-data yang berhasil di-update.
+•	delete, input-nya berupa index data-data yang ingin dihapus dan output-nya berupa data-data yang berhasil dihapus.
+
+3.3.3.3	Interface File Storer
+Interface File Storer menyediakan 3 kelompok fungsi yaitu group, doc, dan docfile dan semuanya memiliki fungsi-fungsi berikut : 
+•	read, input-nya berupa nama file yang ingin dibaca dan output-nya berupa file yang berhasil dibaca.
+•	write, input-nya berupa nama file dan file yang ingin ditulis dan output-nya berupa boolean yang menandakan berhasil atau tidaknya proses penulisan file.
+•	delete, input-nya berupa nama file yang ingin dihapus dan output-nya berupa boolean yang menandakan berhasil atau tidaknya proses penghapusan file.
+
+3.3.3.4	Interface Kysely CRUD
+Interface Kysely CRUD merupakan interface yang disediakan oleh library Kysely berupa query builder.
+
+3.3.3.5	Interface Kysely Database Dialect
+Interface Kysely Database Dialect merupakan interface yang disediakan oleh library Kysely berupa dialect yang akan digunakan oleh query builder untuk berkomunikasi dengan database pilihan seperti MySQL.
+
+3.3.3.6	Komponen Server 
+ 
+	Gambarr 3.3 Server Component Diagram
+
+	Komponen ini terpakai hanya di server. Request yang masuk akan di-handle oleh komponen Server Controller lalu akan menggunakan komponen Server File Manager untuk operasi file atau  Server Model untuk operasi CRUD lalu mengirim response ke klien. 
+
+3.3.3.7	Komponen Client 
+ 
+	Gambarr 3.4 Client Component Diagram
+
+	Komponen ini terpakai hanya di client atau browser. Komponen Client View merupakan view yang digunakan oleh user dan akan menggunakan komponen Client Controller untuk mengirim request jika diperlukan. Response yang masuk akan di-handle oleh komponen Client Controller lalu disampaikan ke komponen Client View, kemudian akan disampaikan ke komponen Client File Manager jika diperlukan operasi file pada klien. Komponen Client View juga menggunakan Komponen Local Storage Store untuk menyimpan data-data user interface sebagai browser cookies.
+
+3.3.3.8	Komponen Server Model 
+ 
+	Gambarr 3.5 Server Model Component Diagram
+	Komponen ini terpakai hanya di server. Komponen Request Eater akan menggunakan komponen Server Cache-First Store (SCFS) dengan interface Storer CRUD untuk menangani CRUD Request. SCFS akan menggunakan komponen Kysely Adapter untuk CRUD pada database dan komponen Server Cache untuk melakukan CRUD dan refresh pada cache yang tersimpan di memory. Komponen Kysely Adapter menggunakan Kysely Query Builder yang dipasangkan dengan dialect database MySQL untuk melakukan operasi pada database. 
+	Aplikasi dapat menggunakan implementasi penyimpanan data apa saja asalkan menyediakan interface yang sesuai dengan interface yang digunakan oleh komponen Request Eater, atau implementasi penanganan request baru dengan interface CRUD Request, atau menggunakan database lain dengan mengganti dialect yang digunakan oleh komponen Kysely Query Builder
+	
+3.3.3.9	Komponen Client Controller
+ 
+	Gambarr 3.6 Client Controller Component Diagram
+
+	Komponen Client Cache-First Store (CCFS) digunakan oleh komponen Client View lalu menggunakan komponen Requester untuk mengirim request ke server dan mendapatkan response. CCFS menggunakan komponen Client Cache untuk melakukan refresh dan operasi CRUD pada cache klien yang tersimpan secara persistent di browser cookies. Kegunaan dari terdapatnya cache pada klien adalah agar tidak memberatkan server setiap kali ingin melihat data, hanya me-request ke server jika dibutuhkan.
+
+3.3.4	Data Flow Diagram
+Data Flow Diagram menjelaskan proses-proses dan aliran data pada sistem. DFD level 0 merupakan pengembangan dari diagram konteks, DFD level 1 merupakan pengembangan dari DFD level 0. Tiap proses dari DFD dapat dikembangkan lagi menjadi lebih detail sampai proses-proses tersebut tidak dapat dikembangkan lagi.
+
+ 
+	Gambarr 3.7 DFD Level 0
+
+ 
+	Gambarr 3.8 DFD Level 1
+	Informasi dan file sumur yang yang di-input oleh pengguna akan diolah di klien dan akan terikirim request ke server untuk diolah dan disimpan disana lalu data akan dikembalikan ke klien dan akan diolah dan disimpan di klien. Pengguna mendapatkan informasi dan file sumur dari klien yang mendapat data tersebut dari penyimpanan klien atau, jika tidak tersedia atau dibutuhkan, dari penyimpanan server dengan cara mengirim request ke server.
+
+3.4	Rancangan Database
+Perancangan database dilakukan dengan membuat tabel-tabel yang diperlukan. Tabel dibuat menggunakan Data Base Management System MySQL. 
+ 
+Gambarr 3.9 Rancangan Database
+Akan dibuat 4 tabel untuk fitur promosi yang dibuat yaitu: group, doc, docfile, dan user.
+3.4.1	Tabel Group
+Tabel Group berfungsi untuk menyimpan data grup yang merupakan parent dari doc atau sumur. Grup sendiri merupakan lokasi atau lapangan yang dapat digunakan untuk mengelompokkan sumur-sumur, suatu grup dapat memiliki banyak grup dan sumur karena ada bisa ada beberapa lapangan dalam suatu lokasi. Tabel Group harus memiliki satu row yang memiliki id 0 untuk digunakan sebagai root.
+Tabel 3.1 Tabel Group
+Atribut	Tipe	Ukuran	Keterangan
+id 	int	11	Primary key untuk identifikasi unik sebuah grup
+name	varchar	191	Nama lokasi atau lapangan
+parentId 	int	11	Foreign key sebagai kode unik penghubung ke grup parent. Jika grup tersebut dihapus maka row akan ikut terhapus
+
+3.4.2	Tabel Doc
+Tabel Doc berfungsi untuk menyimpan data doc yang merupakan parent dari docfile. Doc sendiri merupakan sebuah sumur yang dapat memiliki banyak docfile atau data sumur.
+Tabel 3.2 Tabel Doc
+Atribut	Tipe	Ukuran	Keterangan
+id 	int	11	Primary key untuk identifikasi unik sebuah doc atau sumur
+name	varchar	191	Nama sumur
+groupId 	int	11	Foreign key sebagai kode unik penghubung ke grup parent. Memiliki default value 0. Jika grup tersebut dihapus maka row akan ikut terhapus
+
+3.4.3	Tabel Docfile
+Tabel Docfile berfungsi untuk menyimpan data docfile yang merupakan data dari sebuah sumur dan masing-masing dapat menyimpan satu file sumur.
+Tabel 3.3 Tabel Docfile
+Atribut	Tipe	Ukuran	Keterangan
+id 	int	11	Primary key untuk identifikasi unik sebuah docfile dan refrence untuk file yang bersangkutan
+name	varchar	191	Nama informasi
+docId 	int	11	Foreign key sebagai kode unik penghubung ke sumur pemilik informasi.
+Jika sumur atau doc tersebut dihapus maka row akan terhapus juga.
+dateCreated	datetime		Berisi waktu kapan terakhir kali file di diperbarui.
+userId	varchar	191	Foreign key berbentuk uuid sebagai kode unik penghubung ke user pengunggah informasi			
+isActive	boolean		Penanda apakah informasi aktif atau tidak.			
+fileType	varchar	191	Mime type dari file sumur. Null jika file tidak tersedia.			
+
+3.4.4	Tabel User
+Tabel User digunakan untuk menyimpan data pembuat atau pengunggah data atau file sumur. Untuk implementasi oleh penulis, hanya akan ada satu user dengan id 1 dikarenakan batasan proyek ini. 
+Tabel 3.4 Tabel User
+Atribut	Tipe	Ukuran	Keterangan
+id 	varchar	191	Primary key berbentuk UUID sebagai identifikasi unik seorang user
+name	varchar	191	Nama pengguna
+phone_number	varchar	191	Nomor telpon pengguna			
+
+3.5	Penjadwalan Proyek
+Pengembangan akan dilakukan dengan metode waterfall. Setelah melakukan analisis dan perencanaan, dihasilkan Gantt Chart sebagai berikut sebagai jadwal pengembangan yang akan diikuti. 
+  
+Gambarr 3.10 Gantt Chart Penjadwalan Proyek
+Proyek berjalan selama kurang dari 2 bulan dengan tahapan pengembangan atau koding dimulai sejak minggu kedua setelah perencanaan dan desain sistem selesai.
+
+	 
+BAB IV
+HASIL DAN PEMBAHASAN 
+4.1	Hasil Pengembangan Backend
+Pengembangan backend menghasilkan komponen-komponen yang dijalankan dengan NodeJS dan diperlukan untuk menjalankan operasi CRUD dan file pada server dan klien, selain itu juga menghasilkan API endpoint yang digunakan untuk melakukan operasi CRUD atau operasi file. Hasil API akan ditampilkan dalam bentuk penjelasan untuk menjalankan operasi tertentu, dokumentasi API, dan screenshot.
+openapi: 3.0.0
+info:
+  title: API
+  version: 1.0.0
+paths:
+  '/api':
+    post:
+      summary: CRUD request for server
+      requestBody:
+        description: CRUD request for server
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: Array containing CRUD operations
+              items:
+                type: object
+                properties:
+                  table:
+                    type: string
+                    description: Table on which CRUD operation is to be prformed
+                  action:
+                    type: string
+                    description: CRUD operation to be performed
+                  data:
+                    type: object
+                    description: Inputs or index for CRUD
+      responses:
+        '200':
+          description: Server successfully handled the request
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array containing results of each CRUD operation
+                items:
+                  type: array
+                  description: Array containing results of a CRUD operation
+                  items:
+                    type: object
+                    description: Result of a CRUD operation
+
+  '/api/file/{docfile}':
+    post:
+      summary: Upload a file for a docfile
+      parameters:
+        - name: docfile
+          in: path
+          required: true
+          description: The ID of the docfile.
+          schema:
+            type: string
+      requestBody:
+        description: The binary blob file to upload
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File uploaded successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: docfile on which the file uploaded for.
+
+        '400':
+          description: Bad request. Failed uploading file
+
+    get:
+      summary: Download a file for a docfile
+      parameters:
+        - name: docfile
+          in: path
+          required: true
+          description: The ID of the docfile.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File downloaded successfully.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+API endpoint yang pertama adalah “/api” yang digunakan untuk melakukan operasi CRUD pada server atau disebut juga API CRUD. Hanya digunakan HTTP method “POST” karena fleksibilitasnya dan karena dapat mengirim JSON beserta request-nya sekaligus. Body dari request yang dikirim berupa array agar dapat melakukan batch operation. Hanya digunakan satu endpoint untuk CRUD karena penggunaan-penggunaan setiap operasi CRUD hampir sama yaitu:
+•	Table, tabel dimana operasi CRUD akan dijalankan, berupa “doc”, “docfile”, atau “group”.
+•	Action, operasi CRUD yang akan dijalankan, berupa “insert”, “update”, “read”, atau “delete”.
+•	Data, array berisi beberapa array input (untuk operasi “insert”), input (untuk operasi “update”) atau index (untuk operasi “read” dan “delete”)  dari grup, doc, atau docfile yang akan dilakukan operasi CRUD. 
+Response dari API CRUD ini adalah data hasil-hasil dari masing-masing operasi CRUD tersebut atau disebut Outputs. Spesifikasi untuk input, output, dan index masing-masing data group, doc, dan docfile adalah sebagai berikut:
+openapi: 3.0.0
+info:
+  title: Input Output data Specifications
+  version: 1.0.0
+components:
+  schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID (required for update).
+        name:
+          type: string
+          description: The name (required for insert).
+        parentId:
+          type: integer
+          description: The ID of the parent group (default is 0 for root).
+
+    Doc:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID (required for update).
+        name:
+          type: string
+          description: The name (required for insert).
+        groupId:
+          type: integer
+          description: The ID of the parent group (default is 0 for root).
+
+    DocFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID (required for update).
+        dateCreated:
+          type: string
+          format: date-time
+          description: The date when the docfile was updated.
+        docId:
+          type: integer
+          description: The ID of the doc associated (required for insert).
+        name:
+          type: string
+          description: The name (required for insert).
+        userId:
+          type: string
+          description: The ID of the user (optional, if needed).
+        isActive:
+          type: integer
+          description: Active status (optional, if needed)..
+        fileType:
+          type: string
+          description: File type (optional, if needed).
+
+openapi: 3.0.0
+info:
+  title: Index data Specifications
+  version: 1.0.0
+components:
+  schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID, group property is ignored if this is specified.
+        group:
+          type: integer
+          description: The ID of the parent group (default is 0).
+
+    Doc:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID, group property is ignored if this is specified.
+        group:
+          type: integer
+          description: The ID of the parent group (default is 0).
+
+    DocFile:
+      type: object
+      description: must specify at least one property.
+      properties:
+        id:
+          type: integer
+          description: The ID, doc property is ignored if this is specified.
+        doc:
+          type: integer
+          description: The ID of the parent group
+
+
+	Dibuat mekanisme call queue pada komponen cache, jadi oparasi CUD dijalankan satu persatu agar tidak terjadi race condition jika banyak operasi CUD dilakukan secara bersamaan. Berikut beberapa contoh penggunaan API CRUD.
+ 
+Gambarr 4.1 Request Insert dan delete API CRUD
+ 
+Gambarr 4.2 Request Read dan Update API CRUD
+API endpoint yang kedua adalah “/api/file/(IDdocfile)” yang digunakan untuk melakukan operasi file pada server atau disebut juga API File. Body dari request yang dikirim ke endpoint ini adalah berupa file jika ingin mengupload. Response dari endpoint ini adalah berupa status sukses atau gagal untuk method “POST”  atau upload dan file untuk method “GET” atau download. Berikut adalah contoh penggunaannya untuk mengunggah dan mengunduh file gambar ke suatu docfile dengan id 446.
+ 
+Gambarr 4.4 Request POST API File
+ 
+Gambarr 4.4 Request GET API File
+4.2	Hasil Pengembangan Frontend
+Pengembangan frontend menghasilkan komponen-komponen Svelte yang digunakan pada browser klien termasuk UI.
+ 
+Gambarr 4.5 Tampilan data sumur (teks dan pdf)
+	Yang ditampilkan diatas adalah data sumur yang tipe file-nya dapat ditampilkan oleh aplikasi sesuai kebutuhan pengguna, jika tidak dapat ditampilkan maka tidak akan ditampilkan. Tampilan data dapat di-zoom, warp (jika file teks) dan digeser.
+ 
+Gambarr 4.6 Tampilan upload file sumur
+	Jika file yang tersimpan di klien bukanlah yang terbaru, maka tulisan “update data” akan berwarna kuning lalu dapat di-klik tombol “update” untuk men-download file terbaru. Untuk mengupload file, dapat memilih file lalu jika tipe file tidak sesuai, maka akan ada peringatannya. Jika sudah klik tombol “upload”, file yang dipilih tadi akan terunggah, progress dapat dilihat pada indikator lingkaran, jika ingin membatalkan dapat meng-klik tombol “cancel”. Tombol panah ke atas dan tombol panah ke bawah berfungsi untuk membuka file di tab baru dan mengunduh file.
+ 
+Gambarr 4.7 Tampilan tambah sumur atau grup
+	Membuat sumur baru dapat menggunakan preset dan sumur atau grup akan ditambahkan ke grup yang dipilih atau root jika tidak ada yang dipilih.
+ 
+Gambarr 4.8 Tampilan edit sumur
+ 
+Gambarr 4.9 Tampilan tambah data sumur
+ 
+Gambarr 4.10 Tampilan edit data sumur
+	Perubahan layout pada tampilan web bisa berupa mengubah ukuran-ukuran panel, membuat panel baru dengan cara men-drag tab ke ujung kanan, menutup tab, dan memindah urutan tab baru dengan cara men-drag tab ke ujung tab lain.
+ 
+Gambarr 4.11 Tampilan mengubah layout tab data sumur 
+Gambarr 4.12 Tampilan mengubah ukuran layout data sumur
+
+
+ 
+BAB V
+KESIMPULAN DAN SARAN 
+5.1	Kesimpulan 
+Dalam tahap analisis dan perancangan aplikasi pengelolaan data sumur berbasis web untuk PT Pertamina Hulu Rokan Zona 4, proses ini mencakup identifikasi kebutuhan sistem dan pengguna. Pengguna membutuhkan fitur-fitur seperti pengelolaan data sumur, tampilan sumur yang dapat disesuaikan, kemampuan untuk mengelompokkan sumur, dan berbagai fitur lainnya. Sementara itu, kebutuhan sistem mencakup spesifikasi perangkat keras dan perangkat lunak yang diperlukan.
+Selanjutnya, hasil dari pengembangan aplikasi ini terdiri dari backend dan frontend. Backend mencakup pembuatan API CRUD yang digunakan untuk operasi CRUD di server, serta API File untuk mengelola file-file terkait. Frontend, di sisi lain, mencakup antarmuka pengguna yang memungkinkan pengguna untuk melakukan berbagai tindakan seperti mengelola data sumur, mengunggah dan mengunduh file, serta mengatur tampilan data sumur sesuai kebutuhan mereka.:
+5.2	Saran 
+Berdasarkan hasil magang yang dilakukan, penulis dan pembimbing memberikan saran sebagai berikut: 
+1.	Desain UI seharusnya bisa lebih minimalis lagi dan warna yang digunakan juga bisa lebih tepat lagi.
+2.	Keamanan Data, terapkan enkripsi untuk file sumur pada server sehingga tetap aman jika terjadi kebocoran data.
+3.	Dokumentas, lanjutkan dengan dokumentasi yang kuat untuk backend dan frontend. Ini akan membantu pengguna dan pengembang lain memahami cara menggunakan aplikasi dengan lebih baik.
+  
+ 
+DAFTAR PUSTAKA
+Mozilla Developer Network. (S.d.). "Svelte: A Tutorial Introduction." https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started
+Pechkurov, Andrey. (2018). "An Intro to Node.js That You May Have Missed." ITNEXT. https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7
+Pal, Sayan Kumar. (2023). "Software Engineering | Classical Waterfall Model." GeeksforGeeks. https://www.geeksforgeeks.org/software-engineering-classical-waterfall-msodel/
+Munawar (2018) Analisis Perancangan Sistem Berorientasi Objek dengan UML:
+Unified Modeling Language. Depok: Informatika.
+Booch, G., Rumbaugh, J., & Jacobson, I. (1998). Unified Modeling Language User Guide. Addison Wesley.
+Connolly, T.M. and Begg, C.E. (2005) Database Systems: A Practical Approach to Design, Implementation, and Management. 4th Edition, Pearson Education, Harlow.
+Sidharta, Lani. (1996). Sistem Informasi Bisnis: Analisis dan Desain Sistem Informasi Bisnis. Jakarta: Elex Media Komputindo.
+ 
+LAMPIRAN
+Lampiran 1 Form Penilaian Magang
+ 
+
+
