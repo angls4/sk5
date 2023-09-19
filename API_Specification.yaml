@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: API
+  version: 1.0.0
+paths:
+  '/api':
+    post:
+      summary: CRUD request for server
+      requestBody:
+        description: CRUD request for server
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: Array containing CRUD operations
+              items:
+                type: object
+                properties:
+                  table:
+                    type: string
+                    description: Table on which CRUD operation is to be prformed
+                  action:
+                    type: string
+                    description: CRUD operation to be performed
+                  data:
+                    type: object
+                    description: Inputs or index for CRUD
+      responses:
+        '200':
+          description: Server successfully handled the request
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array containing results of each CRUD operation
+                items:
+                  type: array
+                  description: Array containing results of a CRUD operation
+                  items:
+                    type: object
+                    description: Result of a CRUD operation
+
+  '/api/file/{docfile}':
+    post:
+      summary: Upload a file for a docfile
+      parameters:
+        - name: docfile
+          in: path
+          required: true
+          description: The ID of the docfile.
+          schema:
+            type: string
+      requestBody:
+        description: The binary blob file to upload
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File uploaded successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: docfile on which the file uploaded for.
+
+        '400':
+          description: Bad request. Failed uploading file
+
+    get:
+      summary: Download a file for a docfile
+      parameters:
+        - name: docfile
+          in: path
+          required: true
+          description: The ID of the docfile.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File downloaded successfully.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
