@@ -2,7 +2,7 @@
   import { Sheet, Toolbar } from "svelte-sheets";
 	import type { Config } from "svelte-sheets/defaultconfig";
   import example from './_example.json'
-  import XLSX from 'xlsx'
+  import * as XLSX from './xlsx-patch.mjs'
 	import { convert } from "tes/src/lib/convert";
 	import { onMount } from "svelte";
 

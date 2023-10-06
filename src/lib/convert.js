@@ -108,7 +108,7 @@ export function convert(workbook) {
             if (temp[i].substr(0, 1) != "!") {
                 var cell = workbook.Sheets[sheetName][temp[i]];
                 // if(sheetName == 'LITHOLOGI')
-                console.log(cell)
+                // console.log(cell)
                 var info = getIdFromColumnName(temp[i], true);
                 if (!spreadsheet.data[info[1]]) {
                     spreadsheet.data[info[1]] = [];

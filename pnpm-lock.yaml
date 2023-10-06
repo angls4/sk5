@@ -39,8 +39,8 @@ dependencies:
     specifier: ^1.6.5
     version: 1.6.5
   svelte-sheets:
-    specifier: file:Patch\svelte-sheets4
-    version: file:Patch/svelte-sheets4(b64-to-blob@1.2.19)(hotkeys-js@3.12.0)(xlsx@0.16.9)
+    specifier: file:Patch\svelte-sheets6
+    version: file:Patch/svelte-sheets6(b64-to-blob@1.2.19)(hotkeys-js@3.12.0)
   ts-md5:
     specifier: ^1.3.1
     version: 1.3.1
@@ -4408,16 +4408,14 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  file:Patch/svelte-sheets4(b64-to-blob@1.2.19)(hotkeys-js@3.12.0)(xlsx@0.16.9):
-    resolution: {directory: Patch/svelte-sheets4, type: directory}
-    id: file:Patch/svelte-sheets4
+  file:Patch/svelte-sheets6(b64-to-blob@1.2.19)(hotkeys-js@3.12.0):
+    resolution: {directory: Patch/svelte-sheets6, type: directory}
+    id: file:Patch/svelte-sheets6
     name: svelte-sheets
     peerDependencies:
       b64-to-blob: ^1.2.19
       hotkeys-js: ^3.8.1
-      xlsx: ^0.16.9
     dependencies:
       b64-to-blob: 1.2.19
       hotkeys-js: 3.12.0
-      xlsx: 0.16.9
     dev: false
