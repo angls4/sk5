@@ -133,6 +133,12 @@
 			userId: '1',
 			// fileType:',
 			docId,
+		},
+		7: {
+			name: 'Prognosis',
+			userId: '1',
+			fileType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' as Mimes,
+			docId,
 		}
 	}as DataCrudStyle['docFile']['inputs'] };
 </script>
