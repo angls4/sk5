@@ -3,7 +3,8 @@
 	import type { Config } from "svelte-sheets/defaultconfig";
   import example from './_example.json'
   import * as XLSX from './xlsx-patch.mjs'
-	import { convert } from "tes/src/lib/convert";
+	// import { convert } from "tes/src/lib/convert";
+	import { convert } from "./convert";
 	import { onMount } from "svelte";
 
   export let tableId;
@@ -33,18 +34,19 @@
 let loaded = false;
 let processed = false;
 
-
+let wb;
   async function initSheet() {
     console.log(file)
     console.log(`init sheet`)
     sheets = [];
-    const wb = XLSX.read(new Uint8Array(await file.arrayBuffer()), {
+    wb = XLSX.read(new Uint8Array(await file.arrayBuffer()), {
       type: "array",
       cellFormula: true,
       cellStyles: true,
     });
-    sheets = convert(wb);
-    sheetNames = sheets.map((s) => s.sheetName);
+    sheets = convert(wb,0);
+    sheetNames = wb.SheetNames;
+    // sheetNames = sheets.map((s) => s.sheetName);
     console.log('init sheet completed')
   }
 
@@ -57,15 +59,18 @@ let processed = false;
       console.log(active)
       console.log(loaded)
       console.log(sheets?.[active])
-      if(active != undefined && sheets?.[active] != undefined){
-        console.log('init sheet 2')
-        data = sheets[active]?.data;
-        columns = sheets[active].columns;
-        mergeCells = sheets[active].mergeCells;
-        style = sheets[active].style;
-        processed = true;
-        loaded=false;
-    }
+      if(active != undefined){
+        if(!sheets?.[active] && active != 0) sheets[active] = convert(wb,active)[0];
+        if(sheets?.[active] != undefined){
+          console.log('init sheet 2')
+          data = sheets[active]?.data;
+          columns = sheets[active].columns;
+          mergeCells = sheets[active].mergeCells;
+          style = sheets[active].style;
+          processed = true;
+          loaded=false;
+        }
+      }
   }
 </script>
 {#if processed}
