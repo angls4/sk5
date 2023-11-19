@@ -1,24 +1,43 @@
-## Developing
+## **Penggunaan Software**
+Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/USER%20DOCUMENTATION.pdf)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 5.1 Server (untuk pembaca berpengalaman atau pengembang)
 
-```bash
-npm run dev
+## 5.1.1 Operating Environment
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+- Platform & version: Node.js 18.16.
+- Database & version: MariaDB 10.5.
+
+## 5.1.2 Installation
+
+- Install the correct database and Node.js version
+- Run “npm install” or your node package manager’s equivalent to install
+    the required node modules.
+- Make new file “.env” based on already existing file “env” and configure it
+    according to your environment.
+
+## 5.1.3 Running on development
+
+- Run “npm run dev” or your node package manager’s equivalent. This is to
+    run the application server on development mode.
+
+## 5.1.4 Running on production
+
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
+(unavailable)
 ```
+## 5.2 Client
 
-You can preview the production build with `npm run preview`.
+## 5.2.1 Operating Environment
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- Platform & version: Google Chrome 117.0+
 
+## 5.2.2 Installation
 
+```
+(unavailable)
+```
+```
+5.2.3 Running
+```
+- Run the application’s host url on browser.
