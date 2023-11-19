@@ -1,7 +1,7 @@
 ## **Penggunaan Software**
 Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/USER%20DOCUMENTATION.pdf)
 
-## 5.1 Server (untuk pembaca berpengalaman atau pengembang)
+## 5.1 Server
 
 ## 5.1.1 Operating Environment
 
