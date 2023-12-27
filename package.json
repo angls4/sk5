@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev && wget http://localhost:5173",
+		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview && wget http://localhost:5173",
 		"test": "npm run test:integration && npm run test:unit",
