@@ -22,10 +22,10 @@ paths:
                     description: Table on which CRUD operation is to be prformed
                   action:
                     type: string
-                    description: CRUD operation to be performed
+                    description: CRUD operation to be performed ("create"/"read"/"update"/"delete")
                   data:
                     type: object
-                    description: Inputs or index for CRUD
+                    description: Inputs(for CREATE/UPDATE) or index (for READ/UPDATE/DELETE) for CRUD operation to be performed with
       responses:
         '200':
           description: Server successfully handled the request
