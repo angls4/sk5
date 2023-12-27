@@ -11,7 +11,7 @@ https://github.com/angls4/sk5/tree/main/documentations/Screenshots - *([explanat
 https://github.com/angls4/sk5/tree/main/documentations/Diagrams - *([explanation from System Design document](https://github.com/angls4/sk5/blob/main/documentations/DESAIN%20SISTEM.pdf))*
 
 # Software Usage (English)
-Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/USER%20DOCUMENTATION.pdf)
+Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/documentations/USER%20DOCUMENTATION.pdf)
 
 ## 5.1 Server
 
