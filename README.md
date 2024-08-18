@@ -1,14 +1,14 @@
 # **Well Data Access Project SK5**
 *(WORK IN PROGRESS)*
-![image](https://github.com/angls4/sk5/assets/57803800/cd79732d-0a69-4463-935b-69142fa03080)
+![image](documentations/Videos/frontendDemo.gif)
+## Diagrams
+https://github.com/angls4/sk5/tree/main/documentations/Diagrams - *([explanation from System Design document](https://github.com/angls4/sk5/blob/main/documentations/DESAIN%20SISTEM.pdf))*
 
 # Documentations
 ## Screenshots
 https://github.com/angls4/sk5/tree/main/documentations/Screenshots - *([explanation from SRS document](https://github.com/angls4/sk5/blob/main/documentations/SRS.pdf))*
 ## Videos
-- Demo2 kp - *([.mkv file](https://github.com/angls4/sk5/blob/main/documentations/Videos/RecordDemo2-magang.mkv))*
-## Diagrams
-https://github.com/angls4/sk5/tree/main/documentations/Diagrams - *([explanation from System Design document](https://github.com/angls4/sk5/blob/main/documentations/DESAIN%20SISTEM.pdf))*
+- Full Demo *([.mkv file](https://github.com/angls4/sk5/blob/main/documentations/Videos/RecordDemo2-magang.mkv))*
 
 # Software Usage (English)
 Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/documentations/USER%20DOCUMENTATION.pdf)
