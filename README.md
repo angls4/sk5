@@ -1,6 +1,16 @@
 # **Well Data Access Project SK5**
 *(WORK IN PROGRESS)*
 ![image](documentations/Videos/frontendDemo.gif)
+
+## Technologies Used
+- [SvelteKit](https://kit.svelte.dev/)
+- [SkeletonUI](https://www.skeleton.dev/)
+- [MariaDB](https://mariadb.org/)
+- [Kysely](https://kysely.dev/)
+- [Prisma](https://www.prisma.io/)
+
+
+
 ## Diagrams
 https://github.com/angls4/sk5/tree/main/documentations/Diagrams - *([explanation from System Design document](https://github.com/angls4/sk5/blob/main/documentations/DESAIN%20SISTEM.pdf))*
 
@@ -8,7 +18,7 @@ https://github.com/angls4/sk5/tree/main/documentations/Diagrams - *([explanation
 ## Screenshots
 https://github.com/angls4/sk5/tree/main/documentations/Screenshots - *([explanation from SRS document](https://github.com/angls4/sk5/blob/main/documentations/SRS.pdf))*
 ## Videos
-- Full Demo *([.mkv file](https://github.com/angls4/sk5/blob/main/documentations/Videos/RecordDemo2-magang.mkv))*
+- Full Demo *([.mp4 file](documentations/Videos/RecordDemo2-magang_H.264.mp4))*
 
 # Software Usage (English)
 Dikutip Dari [User Documentation](https://github.com/angls4/sk5/blob/main/documentations/USER%20DOCUMENTATION.pdf)
