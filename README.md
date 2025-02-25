@@ -1,5 +1,7 @@
-# **Well Data Access Project SK5**
-*(WORK IN PROGRESS)*
+# **WOPDM DataView**
+Well Data Access Project SK5
+*(in progress)*
+
 ![image](documentations/Videos/frontendDemo.gif)
 
 ## Technologies Used
